@@ -3,21 +3,24 @@
         "code_barre": "3017620422003",
         "nom": "Vain amour 1L",
         "prix_unitaire_ht": 1200,
+        "date_expiration": "2026-12-31",
         "quantite_stock": 50,
-        "created_at": "2024-01-01"
+        "date_enregistrement": "2026-04-17"
     },
     "3017620422010": {
         "code_barre": "3017620422010",
         "nom": "Huile de palme 1L",
         "prix_unitaire_ht": 1200,
+        "date_expiration": "2027-06-30",
         "quantite_stock": 30,
-        "created_at": "2024-01-01"
+        "date_enregistrement": "2026-04-17"
     },
     "3017620422027": {
         "code_barre": "3017620422027",
         "nom": "Savon de Marseille",
         "prix_unitaire_ht": 450,
+        "date_expiration": "2028-01-01",
         "quantite_stock": 100,
-        "created_at": "2024-01-01"
+        "date_enregistrement": "2026-04-17"
     }
 }

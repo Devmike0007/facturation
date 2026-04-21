@@ -91,7 +91,7 @@ if (isset($_GET['delete'])) {
                     <?php foreach ($users as $username => $user): ?>
                     <tr class="border-b hover:bg-gray-50">
                         <td class="py-3 px-4"><?php echo htmlspecialchars($username); ?></td>
-                        <td class="py-3 px-4"><?php echo htmlspecialchars($user['name'] ?? $username); ?></td>
+                        <td class="py-3 px-4"><?php echo htmlspecialchars($user['nom_complet'] ?? $username); ?></td>
                         <td class="py-3 px-4">
                             <span class="px-2 py-1 rounded-full text-xs <?php
                                 echo $user['role'] === 'super_admin' ? 'bg-red-100 text-red-800' :
@@ -101,7 +101,7 @@ if (isset($_GET['delete'])) {
                                 <?php echo ROLES[$user['role']] ?? $user['role']; ?>
                             </span>
                         </td>
-                        <td class="py-3 px-4"><?php echo isset($user['created_at']) ? date('d/m/Y', strtotime($user['created_at'])) : 'N/A'; ?></td>
+                        <td class="py-3 px-4"><?php echo isset($user['date_creation']) ? date('d/m/Y', strtotime($user['date_creation'])) : 'N/A'; ?></td>
                         <td class="py-3 px-4 text-center">
                             <?php if ($username !== $currentUser['id']): ?>
                             <a href="?delete=<?php echo urlencode($username); ?>"
@@ -151,11 +151,8 @@ if (isset($_GET['delete'])) {
 
                     <div>
                         <label class="block text-sm mb-2 text-gray-700">Nom complet</label>
-                        <input
-                            type="text"
-                            name="name"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-                        />
+                        <input type="text" name="name"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none" />
                     </div>
 
                     <div>

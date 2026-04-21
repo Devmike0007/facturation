@@ -1,20 +1,26 @@
 {
     "admin": {
-        "password": "admin123",
+        "identifiant": "admin",
+        "mot_de_passe": "$2y$10$.bSKf93Zb2aJeNORUo9Cu.QEA9V5lHym0NqJCyrUjHErcN3.Wq1pe",
         "role": "super_admin",
-        "name": "Super Administrateur",
-        "created_at": "2024-01-01"
+        "nom_complet": "Super Administrateur",
+        "date_creation": "2026-04-17",
+        "actif": true
     },
     "manager": {
-        "password": "manager123",
+        "identifiant": "manager",
+        "mot_de_passe": "$2y$10$7/gYmFQs9QO8jysw6i3INOsWFFkdZM88YNWLJV2dOQamF24m/uuC6",
         "role": "manager",
-        "name": "Manager",
-        "created_at": "2024-01-01"
+        "nom_complet": "Manager",
+        "date_creation": "2026-04-17",
+        "actif": true
     },
     "caissier": {
-        "password": "caissier123",
+        "identifiant": "caissier",
+        "mot_de_passe": "$2y$10$D95tLVZadqhP3cIcIBLDL.l2KjPv.LDY1q639YZlRuOTvLyafbHjS",
         "role": "caissier",
-        "name": "Caissier",
-        "created_at": "2024-01-01"
+        "nom_complet": "Caissier",
+        "date_creation": "2026-04-17",
+        "actif": true
     }
 }

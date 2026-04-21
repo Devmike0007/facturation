@@ -9,6 +9,9 @@ define('DB_NAME', 'facturation_db');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 
+// URL de base de l'application
+define('BASE_URL', '/facturation/');
+
 // Chemins des fichiers de données
 define('DATA_DIR', __DIR__ . '/../data/');
 define('PRODUITS_FILE', DATA_DIR . 'produits.json');

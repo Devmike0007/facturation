@@ -1,47 +1,30 @@
 <?php
 require_once '../config/config.php';
 require_once 'session.php';
+require_once '../includes/fonctions-auth.php';
 
-// Rediriger si déjà connecté
 if (isLoggedIn()) {
-    header('Location: ../index.php');
+    header('Location: ' . BASE_URL . 'index.php');
     exit;
 }
 
-$error = '';
+$error   = '';
 $timeout = isset($_GET['timeout']) && $_GET['timeout'] == '1';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = trim($_POST['password'] ?? '');
 
-    // Validation basique
     if (empty($username) || empty($password)) {
         $error = 'Veuillez remplir tous les champs';
     } else {
-        // Charger les utilisateurs
-        $users = json_decode(file_get_contents(UTILISATEURS_FILE), true);
-
-        // Vérifier les comptes de démonstration
-        $demoUsers = DEMO_USERS;
-
-        if (isset($demoUsers[$username]) && $demoUsers[$username]['password'] === $password) {
-            // Connexion réussie
-            $_SESSION['user_id'] = $username;
-            $_SESSION['role'] = $demoUsers[$username]['role'];
-            $_SESSION['user_name'] = $demoUsers[$username]['name'];
+        $user = authenticateUser($username, $password);
+        if ($user) {
+            $_SESSION['user_id']       = $user['id'];
+            $_SESSION['role']          = $user['role'];
+            $_SESSION['user_name']     = $user['name'];
             $_SESSION['last_activity'] = time();
-
-            header('Location: ../index.php');
-            exit;
-        } elseif (isset($users[$username]) && $users[$username]['password'] === $password) {
-            // Connexion avec utilisateur du fichier JSON
-            $_SESSION['user_id'] = $username;
-            $_SESSION['role'] = $users[$username]['role'];
-            $_SESSION['user_name'] = $users[$username]['name'] ?? $username;
-            $_SESSION['last_activity'] = time();
-
-            header('Location: ../index.php');
+            header('Location: ' . BASE_URL . 'index.php');
             exit;
         } else {
             $error = 'Identifiant ou mot de passe incorrect';
@@ -49,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -80,14 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label class="block text-sm mb-2 text-gray-700">Identifiant</label>
                 <div class="relative">
                     <i data-lucide="user" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
-                    <input
-                        type="text"
-                        name="username"
+                    <input type="text" name="username"
                         class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-                        placeholder="Entrez votre identifiant"
-                        required
-                        value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>"
-                    />
+                        placeholder="Entrez votre identifiant" required
+                        value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>" />
                 </div>
             </div>
 
@@ -95,13 +73,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label class="block text-sm mb-2 text-gray-700">Mot de passe</label>
                 <div class="relative">
                     <i data-lucide="lock" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
-                    <input
-                        type="password"
-                        name="password"
+                    <input type="password" name="password"
                         class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-                        placeholder="Entrez votre mot de passe"
-                        required
-                    />
+                        placeholder="Entrez votre mot de passe" required />
                 </div>
             </div>
 
@@ -111,10 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <?php endif; ?>
 
-            <button
-                type="submit"
-                class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors"
-            >
+            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
                 Se connecter
             </button>
         </form>
@@ -126,9 +97,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p class="text-xs text-gray-500">• caissier / caissier123 (Caissier)</p>
         </div>
     </div>
-
-    <script>
-        lucide.createIcons();
-    </script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

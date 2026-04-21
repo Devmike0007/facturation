@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../auth/session.php');
 
 // Vérifier l'authentification
 if (!isLoggedIn()) {
-    header('Location: auth/login.php');
+    header('Location: ' . BASE_URL . 'auth/login.php');
     exit;
 }
 
@@ -20,7 +20,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
     <title><?php echo APP_NAME; ?> - <?php echo ucfirst($currentPage); ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
 </head>
 <body class="min-h-screen bg-gray-50">
     <!-- Header -->
@@ -44,8 +44,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
                         <p class="text-xs text-gray-600"><?php echo ROLES[$currentUser['role']] ?? $currentUser['role']; ?></p>
                     </div>
                 </div>
-
-                <a href="../auth/logout.php" class="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors">
+                <a href="<?php echo BASE_URL; ?>auth/logout.php" class="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors">
                     <i data-lucide="log-out" class="w-4 h-4"></i>
                     <span class="hidden sm:inline">Déconnexion</span>
                 </a>
@@ -66,11 +65,11 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
             <nav class="p-4 space-y-2">
                 <?php
                 $menuItems = [
-                    ['id' => 'facturation', 'label' => 'Facturation', 'icon' => 'shopping-cart', 'roles' => ['caissier', 'manager', 'super_admin'], 'url' => '../modules/facturation/nouvelle-facture.php'],
-                    ['id' => 'produits', 'label' => 'Enregistrer Produit', 'icon' => 'package', 'roles' => ['manager', 'super_admin'], 'url' => '../modules/produits/enregistrer.php'],
-                    ['id' => 'liste-produits', 'label' => 'Liste Produits', 'icon' => 'file-text', 'roles' => ['manager', 'super_admin'], 'url' => '../modules/produits/liste.php'],
-                    ['id' => 'rapports', 'label' => 'Rapports', 'icon' => 'bar-chart-3', 'roles' => ['manager', 'super_admin'], 'url' => '../rapports/rapport-journalier.php'],
-                    ['id' => 'utilisateurs', 'label' => 'Gestion Comptes', 'icon' => 'users', 'roles' => ['super_admin'], 'url' => '../modules/admin/gestion-comptes.php'],
+                    ['id' => 'facturation', 'label' => 'Facturation', 'icon' => 'shopping-cart', 'roles' => ['caissier', 'manager', 'super_admin'], 'url' => BASE_URL . 'modules/facturation/nouvelle-facture.php'],
+                    ['id' => 'produits', 'label' => 'Enregistrer Produit', 'icon' => 'package', 'roles' => ['manager', 'super_admin'], 'url' => BASE_URL . 'modules/produits/enregistrer.php'],
+                    ['id' => 'liste-produits', 'label' => 'Liste Produits', 'icon' => 'file-text', 'roles' => ['manager', 'super_admin'], 'url' => BASE_URL . 'modules/produits/liste.php'],
+                    ['id' => 'rapports', 'label' => 'Rapports', 'icon' => 'bar-chart-3', 'roles' => ['manager', 'super_admin'], 'url' => BASE_URL . 'rapports/rapport-journalier.php'],
+                    ['id' => 'utilisateurs', 'label' => 'Gestion Comptes', 'icon' => 'users', 'roles' => ['super_admin'], 'url' => BASE_URL . 'modules/admin/gestion-comptes.php'],
                 ];
 
                 foreach ($menuItems as $item) {

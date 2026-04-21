@@ -104,6 +104,7 @@ if (isset($_GET['delete'])) {
                         <th class="text-left py-3 px-4">Code-barres</th>
                         <th class="text-left py-3 px-4">Nom</th>
                         <th class="text-right py-3 px-4">Prix HT</th>
+                        <th class="text-center py-3 px-4">Expiration</th>
                         <th class="text-center py-3 px-4">Stock</th>
                         <th class="text-center py-3 px-4">Actions</th>
                     </tr>
@@ -114,6 +115,7 @@ if (isset($_GET['delete'])) {
                         <td class="py-3 px-4"><?php echo htmlspecialchars($produit['code_barre']); ?></td>
                         <td class="py-3 px-4"><?php echo htmlspecialchars($produit['nom']); ?></td>
                         <td class="py-3 px-4 text-right"><?php echo number_format($produit['prix_unitaire_ht'], 0, ',', ' '); ?> <?php echo CURRENCY; ?></td>
+                        <td class="py-3 px-4 text-center"><?php echo isset($produit['date_expiration']) ? date('d/m/Y', strtotime($produit['date_expiration'])) : 'N/A'; ?></td>
                         <td class="py-3 px-4 text-center">
                             <form method="POST" class="inline-flex items-center gap-2">
                                 <input type="hidden" name="code_barre" value="<?php echo htmlspecialchars($produit['code_barre']); ?>">

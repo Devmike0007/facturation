@@ -35,7 +35,7 @@ if (!$facture) {
             <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
                 <div>
                     <p class="text-gray-600">Numéro de facture:</p>
-                    <p><?php echo htmlspecialchars($facture['numero']); ?></p>
+                    <p><?php echo htmlspecialchars($facture['id_facture']); ?></p>
                 </div>
                 <div>
                     <p class="text-gray-600">Caissier:</p>
@@ -62,7 +62,7 @@ if (!$facture) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($facture['items'] as $item): ?>
+                        <?php foreach ($facture['articles'] as $item): ?>
                         <tr class="border-b">
                             <td class="py-2"><?php echo htmlspecialchars($item['nom']); ?></td>
                             <td class="text-right"><?php echo number_format($item['prix_unitaire_ht'], 0, ',', ' '); ?> <?php echo CURRENCY; ?></td>
@@ -81,7 +81,7 @@ if (!$facture) {
                 </div>
                 <div class="flex justify-end gap-4">
                     <span>TVA (<?php echo (TVA_RATE * 100); ?>%):</span>
-                    <span class="w-32"><?php echo number_format($facture['total_tva'], 0, ',', ' '); ?> <?php echo CURRENCY; ?></span>
+                    <span class="w-32"><?php echo number_format($facture['tva'], 0, ',', ' '); ?> <?php echo CURRENCY; ?></span>
                 </div>
                 <div class="flex justify-end gap-4 pt-2 border-t-2 border-gray-300">
                     <span class="text-xl">Net à payer:</span>
